@@ -11,8 +11,11 @@ public class OAuthServiceImpl implements OAuthService {
 
     @Override
     public Boolean isValidClientId(String clientId) {
-        // TODO
+        // TODO 虚假的逻辑
+        if(clientId.equals("123456")){
+            return true;
+        }
 
-        return true;
+        return false;
     }
 }
