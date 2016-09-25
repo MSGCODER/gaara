@@ -1,5 +1,8 @@
 package waw.gaara.web.server;
 
+import org.apache.oltu.oauth2.as.issuer.MD5Generator;
+import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
+import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.apache.oltu.oauth2.as.request.OAuthRequest;
 import org.apache.oltu.oauth2.common.error.OAuthError;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import waw.gaara.service.AccountService;
 import waw.gaara.service.OAuthService;
+import waw.gaara.util.OAuthUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +42,7 @@ public class OAuthServer {
 
         // 校验客户端Id
         if(!oAuthService.isValidClientId(oAuthAuthzRequest.getClientId())){
-            return new ModelAndView("error", "errorMsg", "非法的client id");
+            return new ModelAndView("error", "errorMsg", "非法的client id.");
         }
 
         String responseType = oAuthAuthzRequest.getParam("response_type");
@@ -57,13 +61,18 @@ public class OAuthServer {
                 String password = oAuthAuthzRequest.getParam("password");
 
                 if(accountService.isValidAccount(username, password)){
-
+                    // 生成授权码
+                    OAuthIssuer oAuthIssuer = new OAuthIssuerImpl(new MD5Generator());
+                    String authCode = oAuthIssuer.authorizationCode();
+                    String redirectUrl = oAuthAuthzRequest.getParam("redirect_url");
+                    return new ModelAndView("redirect:" + redirectUrl + "?code=" + authCode);
                 }else {
-                    
+                    return new ModelAndView("error", "errorMsg", "用户名或密码不正确.");
                 }
 
             }else {
                 mv.setViewName("auth_login");
+                mv.addAllObjects(OAuthUtils.getOauthModel(oAuthAuthzRequest));
             }
         }
 
