@@ -5,6 +5,7 @@ import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.apache.oltu.oauth2.as.request.OAuthRequest;
+import org.apache.oltu.oauth2.as.request.OAuthTokenRequest;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -77,6 +78,15 @@ public class OAuthServer {
         }
 
         return mv;
+    }
+
+    @RequestMapping(value = "/access_token")
+    public ModelAndView accessToken(HttpServletRequest request) throws OAuthProblemException, OAuthSystemException {
+        OAuthTokenRequest oAuthTokenRequest = new OAuthTokenRequest(request);
+
+        //TODO
+        
+        return null;
     }
 
 }
