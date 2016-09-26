@@ -10,9 +10,14 @@
    http://www.springframework.org/schema/mvc
    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <import resource="mybatis.xml"/>
 
     <mvc:annotation-driven/>
     <context:annotation-config/>
-    <context:component-scan base-package="waw.gaara"/>
+    <context:component-scan base-package="waw.gaara.service"/>
+    <context:component-scan base-package="waw.gaara.web"/>
+
+
+
 
 </beans>
