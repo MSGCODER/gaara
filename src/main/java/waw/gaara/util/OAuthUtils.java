@@ -2,7 +2,6 @@ package waw.gaara.util;
 
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.springframework.util.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -6,6 +6,7 @@ import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.apache.oltu.oauth2.as.request.OAuthRequest;
 import org.apache.oltu.oauth2.as.request.OAuthTokenRequest;
+import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import waw.gaara.common.Response;
+import waw.gaara.common.Response.Status;
+import waw.gaara.common.ResponseWithData;
 import waw.gaara.service.AccountService;
 import waw.gaara.service.OAuthService;
 import waw.gaara.util.OAuthUtils;
@@ -80,13 +84,48 @@ public class OAuthServer {
         return mv;
     }
 
+    /**
+     * 根据授权码获取access_token
+     * @param request
+     * @return
+     * @throws OAuthProblemException
+     * @throws OAuthSystemException
+     *
+     * example : curl -d "client_id=123456&client_secret=abcdefg&grant_type=authorization_code&code=secret&redirect_uri=xxx" http://localhost:8080/oauth2/access_token
+     */
     @RequestMapping(value = "/access_token")
-    public ModelAndView accessToken(HttpServletRequest request) throws OAuthProblemException, OAuthSystemException {
+    @ResponseBody
+    public Response accessToken(HttpServletRequest request) throws OAuthProblemException, OAuthSystemException {
+        ResponseWithData response = new ResponseWithData();
+
         OAuthTokenRequest oAuthTokenRequest = new OAuthTokenRequest(request);
 
-        //TODO
-        
-        return null;
+        //1. 校验客户端Id是否正确
+        if(!oAuthService.isValidClientId(oAuthTokenRequest.getClientId())){
+            // return new ModelAndView("error", "errorMsg", "非法的client id.");
+            return new Response(Status.CODE_INVALID_CLIENT_ID, Status.MSG_INVALID_CLIENT_ID);
+        }
+
+        //2. 校验客户端secret key是否正确
+        if(!oAuthService.isValidClientSecretKey(oAuthTokenRequest.getClientSecret())){
+            return new Response(Status.CODE_INVALID_CLIENT_SECRET_KEY, Status.MSG_INVALID_CLIENT_SECRET_KEY);
+        }
+
+        //3. 校验AUTHORIZATION_CODE
+        String authCode = oAuthTokenRequest.getParam(OAuth.OAUTH_CODE);
+        if(!oAuthService.isValidAuthCode(authCode)){
+            return new Response(Status.CODE_INVALID_AUTH_CODE, Status.MSG_INVALID_AUTH_CODE);
+        }
+
+        // 生成access_token
+        OAuthIssuer oAuthIssuer = new OAuthIssuerImpl(new MD5Generator());
+        String accessToken = oAuthIssuer.accessToken();
+
+        response.putData("access_token", accessToken);
+        // access_token的生命周期,单位是秒
+        response.putData("expires_in", 3600);
+
+        return response;
     }
 
 }

@@ -18,4 +18,23 @@ public class OAuthServiceImpl implements OAuthService {
 
         return false;
     }
+
+    @Override
+    public Boolean isValidClientSecretKey(String clientSecretKey) {
+        // todo 虚假的逻辑
+        if(clientSecretKey.equals("abcdefg")){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean isValidAuthCode(String authCode) {
+        // todo 虚假的逻辑
+        if(authCode.equals("secret")){
+            return true;
+        }
+
+        return false;
+    }
 }

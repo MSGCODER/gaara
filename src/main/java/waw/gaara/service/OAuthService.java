@@ -11,4 +11,18 @@ public interface OAuthService {
      */
     Boolean isValidClientId(String clientId);
 
+    /**
+     * 校验客户端secret key是否合法
+     * @param clientSecretKey
+     * @return
+     */
+    Boolean isValidClientSecretKey(String clientSecretKey);
+
+    /**
+     * 校验授权码是否正确
+     * @param authCode
+     * @return
+     */
+    Boolean isValidAuthCode(String authCode);
+
 }
