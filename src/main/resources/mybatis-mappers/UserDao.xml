@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.waw.itachi.dao.UserDao">
+    <select id="getUserByUserId" parameterType="string" resultType="user">
+        SELECT * FROM user where user_id = #{userId}
+    </select>
+
+    <!-- 如果你的数据库支持自动生成主键的字段（比如 MySQL 和 SQL Server），
+    那么你可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上就OK了 -->
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(user_id, password, nickname)
+        VALUES (#{userId}, #{nickname}, #{nickname});
+    </insert>
+
+</mapper>
