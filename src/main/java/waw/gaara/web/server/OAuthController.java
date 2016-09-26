@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "/oauth2")
-public class OAuthServer {
+public class OAuthController {
     @Autowired
     private OAuthService oAuthService;
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/client")
-public class CallBackController {
+public class ClientController {
     @RequestMapping(value = "/callback")
     @ResponseBody
     public String callback(@RequestParam String code){
