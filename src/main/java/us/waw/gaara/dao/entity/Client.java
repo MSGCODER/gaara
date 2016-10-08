@@ -1,4 +1,4 @@
-package waw.gaara.dao.entity;
+package us.waw.gaara.dao.entity;
 
 /**
  * Created by lenn on 16/9/26.

@@ -1,4 +1,4 @@
-package waw.gaara.web.server;
+package us.waw.gaara.web.server;
 
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
@@ -16,12 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import waw.gaara.common.Response;
-import waw.gaara.common.Response.Status;
-import waw.gaara.common.ResponseWithData;
-import waw.gaara.service.AccountService;
-import waw.gaara.service.OAuthService;
-import waw.gaara.util.OAuthUtils;
+import us.waw.gaara.common.Response;
+import us.waw.gaara.common.Response.Status;
+import us.waw.gaara.common.ResponseWithData;
+import us.waw.gaara.service.AccountService;
+import us.waw.gaara.service.OAuthService;
+import us.waw.gaara.util.OAuthUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

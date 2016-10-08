@@ -1,4 +1,4 @@
-package waw.gaara.common;
+package us.waw.gaara.common;
 
 import org.springframework.ui.ModelMap;
 

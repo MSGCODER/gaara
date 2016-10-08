@@ -1,4 +1,4 @@
-package waw.gaara.service;
+package us.waw.gaara.service;
 
 /**
  * Created by lenn on 16/9/25.

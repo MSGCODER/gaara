@@ -1,4 +1,4 @@
-package waw.gaara.util;
+package us.waw.gaara.util;
 
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.springframework.util.StringUtils;

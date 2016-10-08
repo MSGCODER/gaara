@@ -1,4 +1,4 @@
-package waw.gaara.dao.entity;
+package us.waw.gaara.dao.entity;
 
 import java.util.Date;
 

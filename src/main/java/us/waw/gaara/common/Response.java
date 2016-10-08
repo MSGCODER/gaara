@@ -1,4 +1,4 @@
-package waw.gaara.common;
+package us.waw.gaara.common;
 
 /**
  * Created by lenn on 16/7/13.

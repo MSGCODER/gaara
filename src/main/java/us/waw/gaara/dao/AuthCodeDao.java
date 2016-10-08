@@ -1,4 +1,4 @@
-package waw.gaara.dao;
+package us.waw.gaara.dao;
 
 /**
  * Created by lenn on 16/9/26.

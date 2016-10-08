@@ -1,7 +1,7 @@
-package waw.gaara.service.impl;
+package us.waw.gaara.service.impl;
 
 import org.springframework.stereotype.Service;
-import waw.gaara.service.OAuthService;
+import us.waw.gaara.service.OAuthService;
 
 /**
  * Created by lenn on 16/9/20.
