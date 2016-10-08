@@ -29,4 +29,15 @@
             <property name="mapperLocations" value="classpath:mybatis-mappers/*.xml"/>
         </bean>
 
+        <!-- 配置事务管理器 -->
+        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource"/>
+        </bean>
+
+    <!-- 利用mybatis-spring框架做映射 -->
+    <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="us.waw.gaara.dao.UserDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
 </beans>

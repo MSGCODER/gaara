@@ -6,6 +6,6 @@
 <!-- mybatis的XML配置文件, 详情可参考: http://www.mybatis.org/mybatis-3/zh/configuration.html -->
 <configuration>
     <typeAliases>
-        <package name="waw.gaara.dao.entity"/>
+        <package name="us.waw.gaara.dao.entity"/>
     </typeAliases>
 </configuration>
